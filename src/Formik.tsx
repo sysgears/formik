@@ -271,7 +271,7 @@ export class Formik<Values = FormikValues> extends React.Component<
       this.validator();
     }
 
-    const [promise, cancel] = makeCancelable(
+    const [promise] = makeCancelable(
       Promise.all([
         this.runFieldLevelValidations(values),
         this.props.validationSchema ? this.runValidationSchema(values) : {},
@@ -283,7 +283,7 @@ export class Formik<Values = FormikValues> extends React.Component<
         );
       })
     );
-    this.validator = cancel;
+    // this.validator = cancel;
     return promise
       .then((errors: FormikErrors<Values>) => {
         if (this.didMount) {
